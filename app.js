@@ -10,13 +10,13 @@ var express = require('express');
 var MbedConnectorApi = require('mbed-connector-api');
 
 // CONFIG (change these)
-var accessKey = process.env.ACCESS_KEY || "ChangeMe";
+var accessKey = process.env.ACCESS_KEY || "QK4YZTT7GE9L6GWT4R250R3PZR4AFDNYX6UBCNR8";
 var port = process.env.PORT || 8080;
 
 // Paths to resources on the endpoints
 var blinkResourceURI = '/3201/0/5850';
-var blinkPatternResourceURI = '/3201/0/5853';
-var buttonResourceURI = '/3200/0/5501';
+var blinkPatternResourceURI = '/led/0/rgb';
+var buttonResourceURI = '/button/0/clicks';
 
 // Instantiate an mbed Device Connector object
 var mbedConnectorApi = new MbedConnectorApi({
@@ -147,7 +147,7 @@ mbedConnectorApi.on('notification', function(notification) {
 });
 
 // Start the app
-server.listen(port, function() {
+server.listen(process.env.IP, port, function() {
   // Set up the notification channel (pull notifications)
   mbedConnectorApi.startLongPolling(function(error) {
     if (error) throw error;
